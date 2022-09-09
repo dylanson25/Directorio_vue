@@ -19,7 +19,7 @@
       type="tel"
       icon="phone"
     />
-    <div class="card-footer">
+    <footer class="card-footer">
       <b-button
         @click="() => $emit('cancel')"
         class="btn-space"
@@ -32,7 +32,7 @@
         type="is-success is-light"
         >{{ btnLabel }}</b-button
       >
-    </div>
+    </footer>
   </div>
 </template>
 
@@ -45,7 +45,7 @@ export default {
     Input,
   },
   methods: {
-    ...mapActions(["createPerson"]),
+    ...mapActions(["createPerson", "updateEntry"]),
     validatePersona() {
       if (this.persona.nombre.length == 0)
         this.hasError.nombre = { err: true, mess: "Falta llenar este campo" };
@@ -68,7 +68,10 @@ export default {
         !this.hasError.direccion.err &&
         !this.hasError.phone.err
       ) {
-        this.createPerson(this.persona);
+        this.btnLabel === "Agregar"
+          ? this.createPerson(this.persona)
+          : this.updateEntry(this.persona);
+
         this.persona.nombre = "";
         this.persona.direccion = "";
         this.persona.phone = "";
@@ -92,7 +95,18 @@ export default {
     };
   },
   props: {
-    btnLabel: { type: String, default: null },
+    btnLabel: { type: String, default: "" },
+    value: {
+      type: Object,
+      default() {
+        return {
+          uid: "",
+          nombre: "",
+          direccion: "",
+          phone: "",
+        };
+      },
+    },
   },
 };
 </script>

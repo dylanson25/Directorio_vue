@@ -1,5 +1,6 @@
 <template>
   <b-field
+    v-model="inputValue"
     :label="label"
     :type="{ 'is-danger': hasError.err }"
     :message="hasError.mess"

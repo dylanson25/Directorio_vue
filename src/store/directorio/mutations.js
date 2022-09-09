@@ -17,3 +17,9 @@ export const deletePersona = (state, uid) => {
   state.directorio.splice(idx, 1);
   localStorage.setItem("directorio", JSON.stringify(state.directorio));
 };
+
+export const updateEntry = (state, registro) => {
+  const idx = state.directorio.findIndex(({ uid }) => registro.uid === uid);
+  state.directorio[idx] = registro;
+  localStorage.setItem("directorio", JSON.stringify(state.directorio));
+};

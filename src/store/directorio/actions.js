@@ -25,6 +25,14 @@ export const createPerson = async ({ commit }, newPerson) => {
     phone,
   });
 };
+
 export const deletePersona = async ({ commit }, uid) => {
   commit("deletePersona", uid);
+};
+
+export const updateEntry = async (
+  { commit },
+  { direccion, nombre, uid, phone }
+) => {
+  commit("updateEntry", { direccion, nombre, uid, phone });
 };

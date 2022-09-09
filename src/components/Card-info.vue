@@ -20,7 +20,20 @@
           type="is-danger is-light"
           >Eliminar</b-button
         >
-        <b-button class="btn-space" type="is-success is-light">Editar</b-button>
+        <b-button
+          @click="
+            () =>
+              $emit('OpenModal', {
+                uid,
+                nombre,
+                direccion,
+                phone,
+              })
+          "
+          class="btn-space"
+          type="is-success is-light"
+          >Editar</b-button
+        >
       </div>
     </div>
   </div>
@@ -56,6 +69,7 @@ export default {
   },
   data() {
     return {
+      isActive: false,
       swalWithBootstrapButtons: this.$swal.mixin({
         customClass: {
           confirmButton: "button is-success is-light ",
@@ -66,10 +80,10 @@ export default {
     };
   },
   props: {
-    uid: { type: String, default: null },
-    nombre: { type: String, default: null },
-    direccion: { type: String, default: null },
-    phone: { type: String, default: null },
+    uid: { type: String, default: "" },
+    nombre: { type: String, default: "" },
+    direccion: { type: String, default: "" },
+    phone: { type: String, default: "" },
   },
 };
 </script>
