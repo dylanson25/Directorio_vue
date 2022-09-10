@@ -1,18 +1,9 @@
 <template>
   <div class="list">
     <template v-if="isActive">
-      <EditarPersona
-        v-model="isActive"
-        :values="dataToEdit"
-        @desactive="clearData"
-      />
+      <EditarPersona v-model="isActive" :values="dataToEdit" @desactive="clearData" />
     </template>
-    <CardInfo
-      v-for="(registro, key) in directorio"
-      :key="key"
-      :registro="registro"
-      @OpenModal="edit"
-    />
+    <CardInfo v-for="(registro, key) in directorio" :key="key" :registro="registro" @OpenModal="edit" />
   </div>
 </template>
 
@@ -66,6 +57,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
 @media only screen and (min-width: 540px) {
   .list {
     padding: 10px;
