@@ -1,5 +1,5 @@
 <template>
-  <div class="card-footer">
+  <footer class="card-footer">
     <Button
       @click="() => $emit('clickDanger')"
       :label="labelDanger"
@@ -12,7 +12,7 @@
       type="is-success is-light"
       spaced
     />
-  </div>
+  </footer>
 </template>
 
 <script>
