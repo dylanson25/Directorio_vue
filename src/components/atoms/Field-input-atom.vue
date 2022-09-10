@@ -1,6 +1,6 @@
 <template>
   <b-field :label="title" required>
-    <b-input v-bind="{ ...$props, ...$attrs }" v-model="text" required />
+    <b-input v-model="text" v-bind="{ ...$props, ...$attrs }" required />
   </b-field>
 </template>
 
@@ -16,12 +16,16 @@ export default {
     value(value) {
       this.text = value;
     },
+    text() {
+      this.$emit("input", this.text);
+    },
   },
   props: {
     title: { type: String, default: "titulo" },
     type: { type: String, default: null },
-    maxLength: { type: Number, default: null },
+    maxlength: { type: Number, default: null },
     value: { type: String, default: null },
+    icon: { type: String, default: null },
   },
 };
 </script>

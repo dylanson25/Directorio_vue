@@ -8,12 +8,9 @@
       />
     </template>
     <CardInfo
-      v-for="(persona, key) in directorio"
+      v-for="(registro, key) in directorio"
       :key="key"
-      :uid="persona.uid"
-      :nombre="persona.nombre"
-      :direccion="persona.direccion"
-      :phone="persona.phone"
+      :registro="registro"
       @OpenModal="edit"
     />
   </div>

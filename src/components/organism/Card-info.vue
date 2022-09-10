@@ -16,7 +16,7 @@
       <GroupButtons
         labelSucces="Editar"
         labelDanger="Eliminar"
-        @clickDanger="() => confirmDelatePersona(uid)"
+        @clickDanger="() => confirmDelatePersona(registro.uid)"
         @clickSucces="() => $emit('OpenModal', registro)"
       />
     </div>
@@ -57,7 +57,6 @@ export default {
   },
   data() {
     return {
-      isActive: false,
       swalWithBootstrapButtons: this.$swal.mixin({
         customClass: {
           confirmButton: "button is-success is-light ",

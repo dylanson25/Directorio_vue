@@ -1,80 +1,47 @@
 <template>
   <div>
+    <Input v-model="registro.nombre" title="Nombre completo:" icon="account" />
+    <Input v-model="registro.direccion" title="Dirección:" icon="home" />
     <Input
-      :hasError="this.hasError.nombre"
-      v-model="persona.nombre"
-      label="Nombre completo:"
-      icon="account"
-    />
-    <Input
-      :hasError="this.hasError.direccion"
-      v-model="persona.direccion"
-      label="Dirección:"
-      icon="home"
-    />
-    <Input
-      :hasError="this.hasError.phone"
-      v-model="persona.phone"
-      label="Numero de telefono:"
+      v-model="registro.phone"
+      title="Numero de telefono:"
       type="tel"
       icon="phone"
+      :maxlength="10"
     />
-    <footer class="card-footer">
-      <b-button
-        @click="() => $emit('cancel')"
-        class="btn-space"
-        type="is-danger is-light"
-        >Cancelar</b-button
-      >
-      <b-button
-        @click="validatePersona"
-        class="btn-space"
-        type="is-success is-light"
-        >{{ btnLabel }}</b-button
-      >
-    </footer>
+    <GroupButtons
+      :labelSucces="btnLabel"
+      labelDanger="Cancelar"
+      @clickDanger="() => $emit('cancel')"
+      @clickSucces="validatePersona"
+    />
   </div>
 </template>
 
 <script>
-import { Input } from "@/components";
+import { Input, GroupButtons } from "@/components";
 import { mapActions } from "vuex";
 
 export default {
   components: {
     Input,
+    GroupButtons,
   },
   methods: {
     ...mapActions(["createPerson", "updateEntry"]),
     validatePersona() {
-      if (this.persona.nombre.length == 0)
-        this.hasError.nombre = { err: true, mess: "Falta llenar este campo" };
-      if (this.persona.direccion.length == 0)
-        this.hasError.direccion = {
-          err: true,
-          mess: "Falta llenar este campo",
-        };
-      if (this.persona.phone.length == 0) {
-        this.hasError.phone = { err: true, mess: "Falta llenar este campo" };
-      } else if (!this.regexTel.test(this.persona.phone)) {
-        this.hasError.phone = {
-          err: true,
-          mess: "Formato de telefono no valido",
-        };
-      }
-
       if (
-        !this.hasError.nombre.err &&
-        !this.hasError.direccion.err &&
-        !this.hasError.phone.err
+        !this.registro.nombre.lenght > 0 &&
+        !this.registro.direccion.lenght > 0 &&
+        !this.registro.phone.lenght > 0
       ) {
         this.btnLabel === "Agregar"
-          ? this.createPerson(this.persona)
-          : this.updateEntry(this.persona);
+          ? this.createPerson(this.registro)
+          : this.updateEntry(this.registro);
 
-        this.persona.nombre = "";
-        this.persona.direccion = "";
-        this.persona.phone = "";
+        this.registro.nombre = "";
+        this.registro.direccion = "";
+        this.registro.phone = "";
         this.$emit("cancel");
       }
     },
@@ -82,16 +49,7 @@ export default {
   data() {
     return {
       regexTel: new RegExp("[0-9]$"),
-      persona: {
-        nombre: "",
-        direccion: "",
-        phone: "",
-      },
-      hasError: {
-        nombre: { err: false, mess: "" },
-        direccion: { err: false, mess: "" },
-        phone: { err: false, mess: "" },
-      },
+      registro: { ...this.value },
     };
   },
   props: {
@@ -110,13 +68,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-.card-footer {
-  display: flex;
-  padding-top: 13px;
-  justify-content: space-evenly;
-}
-.btn-space {
-  width: 45%;
-}
-</style>
+<style scoped></style>
