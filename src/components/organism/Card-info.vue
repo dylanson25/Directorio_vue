@@ -1,47 +1,35 @@
 <template>
   <div class="card-info card">
     <div class="card-header">
-      <p class="card-header-title">{{ nombre }}</p>
+      <p class="card-header-title">{{ registro.nombre }}</p>
     </div>
     <div class="card-content">
       <div class="content">
         <p class="subtitle">Dirección</p>
-        <p class="ps">{{ direccion }}</p>
+        <p class="ps">{{ registro.direccion }}</p>
       </div>
       <hr />
       <div class="content">
         <p class="subtitle">Numero</p>
-        <p class="ps">{{ phone }}</p>
+        <p class="ps">{{ registro.phone }}</p>
       </div>
-      <div class="card-footer">
-        <b-button
-          class="btn-space"
-          @click="() => confirmDelatePersona(uid)"
-          type="is-danger is-light"
-          >Eliminar</b-button
-        >
-        <b-button
-          @click="
-            () =>
-              $emit('OpenModal', {
-                uid,
-                nombre,
-                direccion,
-                phone,
-              })
-          "
-          class="btn-space"
-          type="is-success is-light"
-          >Editar</b-button
-        >
-      </div>
+      <GroupButtons
+        labelSucces="Editar"
+        labelDanger="Eliminar"
+        @clickDanger="() => confirmDelatePersona(registro.uid)"
+        @clickSucces="() => $emit('OpenModal', registro)"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions } from "vuex";
+import { GroupButtons } from "@/components";
 export default {
+  components: {
+    GroupButtons,
+  },
   methods: {
     ...mapActions(["deletePersona"]),
     confirmDelatePersona(uid) {
@@ -69,7 +57,6 @@ export default {
   },
   data() {
     return {
-      isActive: false,
       swalWithBootstrapButtons: this.$swal.mixin({
         customClass: {
           confirmButton: "button is-success is-light ",
@@ -80,10 +67,17 @@ export default {
     };
   },
   props: {
-    uid: { type: String, default: "" },
-    nombre: { type: String, default: "" },
-    direccion: { type: String, default: "" },
-    phone: { type: String, default: "" },
+    registro: {
+      type: Object,
+      default() {
+        return {
+          uid: "",
+          nombre: "",
+          direccion: "",
+          phone: "",
+        };
+      },
+    },
   },
 };
 </script>
@@ -109,14 +103,6 @@ export default {
   width: 90%;
   margin-bottom: 10px;
   margin-top: 10px;
-}
-.card-footer {
-  display: flex;
-  padding-top: 13px;
-  justify-content: space-evenly;
-}
-.btn-space {
-  width: 45%;
 }
 @media only screen and (min-width: 540px) {
   .card-header-title {
