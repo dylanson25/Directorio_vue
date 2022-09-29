@@ -1,0 +1,6 @@
+{ 
+  uid: 1a4650e20eb1421cb945907c7bd52012  
+  nombre: xtfchgvj  
+  direccion: vhbkjnlmñ  
+  phone: 5768980965  
+} 

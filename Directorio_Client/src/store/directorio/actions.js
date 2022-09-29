@@ -1,15 +1,15 @@
 import { generateUUID } from "@/utils";
 
-export const loadDirectorio = async ({ commit }) => {
+export const loadDirectorio = async ({ state, commit }) => {
   const data = localStorage.getItem("directorio");
   setTimeout(() => {
     if (data) {
       let directorio = JSON.parse(data);
       commit("clearDirectorio");
       commit("setDirectorio", directorio);
+      state.socketio.io.emit("update_directorio", state.directorio);
     } else {
       localStorage.setItem("directorio", []);
-      commit("setDirectorio", []);
     }
   }, 1000);
 };
