@@ -12,6 +12,10 @@ const { Server } = require("socket.io", {
 
 const io = new Server(server);
 
+app.get("/", (req, res) => {
+  res.send("SocketO...");
+});
+
 io.on("connection", (socket) => {
   console.log("A user conected");
 });
@@ -19,4 +23,5 @@ io.on("connection", (socket) => {
 server.listen(8081, () => {
   console.log("listening on *:8081");
 });
+
 module.exports = app;
