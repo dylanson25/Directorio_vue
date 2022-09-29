@@ -5,6 +5,9 @@ import * as actions from "./directorio/actions";
 import * as getters from "./directorio/gatters";
 import * as mutations from "./directorio/mutations";
 
+// import directorioStore from "./directorio";
+import socketio from "./socketio";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -14,5 +17,8 @@ export default new Vuex.Store({
   state: {
     isLoading: true,
     directorio: [],
+  },
+  modules: {
+    socketio,
   },
 });
