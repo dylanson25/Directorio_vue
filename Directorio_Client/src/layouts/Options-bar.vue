@@ -1,7 +1,7 @@
 <template>
   <div class="options">
     <Search @sendSearch="(value) => $emit('sendSearch', value)" />
-    <CardDropForm title="Agregar personsa" :closeDrop="showForm">
+    <CardDropForm title="Agregar persona" :closeDrop="showForm">
       <FormDataPerson
         btnLabel="Agregar"
         @cancel="() => (showForm = !showForm)"
