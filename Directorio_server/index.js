@@ -6,7 +6,7 @@ const server = http.createServer(app);
 
 const { Server } = require("socket.io", {
   cors: {
-    origin: "http//localhost:8081",
+    origin: "http//192.168.1.69:8081",
   },
 });
 
