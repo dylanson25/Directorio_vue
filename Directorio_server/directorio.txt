@@ -1,6 +1,1 @@
-{ 
-  uid: 1a4650e20eb1421cb945907c7bd52012  
-  nombre: xtfchgvj  
-  direccion: vhbkjnlmñ  
-  phone: 5768980965  
-} 
+[{"direccion":"Paseo de tulipanes #33","nombre":"Dylan Ivan","uid":"945151a8850d48278beb5b3f5bd0e7ce","phone":"3121319198"}]
