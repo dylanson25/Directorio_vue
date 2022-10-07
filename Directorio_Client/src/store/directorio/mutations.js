@@ -13,23 +13,21 @@ export const clearDirectorio = (state) => {
 
 export const addNewPerson = (state, persona) => {
   state.directorio.unshift(persona);
-  localStorage.setItem("directorio", JSON.stringify(state.directorio));
   state.socketio.io.emit("update_directorio", state.directorio);
 };
 
 export const deletePersona = (state, uid) => {
   const idx = state.directorio.findIndex((persona) => uid === persona.uid);
   state.directorio.splice(idx, 1);
-  localStorage.setItem("directorio", JSON.stringify(state.directorio));
   state.socketio.io.emit("update_directorio", state.directorio);
 };
 
 export const updateEntry = (state, registro) => {
   const idx = state.directorio.findIndex(({ uid }) => registro.uid === uid);
   state.directorio[idx] = registro;
-  localStorage.setItem("directorio", JSON.stringify(state.directorio));
   state.socketio.io.emit("update_directorio", state.directorio);
 };
 export const SOCKET_UPDATE_DIRECTORIO = (state, directorio) => {
+  console.log(directorio);
   state.directorio = directorio;
 };
