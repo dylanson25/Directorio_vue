@@ -10,6 +10,7 @@ export const loadDirectorio = async ({ state, commit }) => {
       state.socketio.io.emit("update_directorio", state.directorio);
     } else {
       localStorage.setItem("directorio", []);
+      commit("setIsLoding");
     }
   }, 1000);
 };

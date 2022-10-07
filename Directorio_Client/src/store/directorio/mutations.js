@@ -3,6 +3,10 @@ export const setDirectorio = (state, directorio) => {
   state.isLoading = false;
 };
 
+export const setIsLoding = (state) => {
+  state.isLoading = false;
+};
+
 export const clearDirectorio = (state) => {
   state.directorio = [];
 };
