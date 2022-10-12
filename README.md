@@ -1,37 +1,35 @@
-# CRUD Directorio
+# CRUD Directorio contenerizado con docker
 
 ## Descripción
 
-Creación de un CRUD basico utilizando localstorage que permita guardar registros de una persona, mostrarlos y eliminarlos, utilizando una solo vista, teniedno en cuenta que tiene ser responsive.
+En esta rama se encuentran los archivos de configuración para contenizar la aplicación en Dockerfile
 
-Esta Aplicación fue creada como parte de una tarea para la clase de programacion distribuida, con el proposito de integrar diferentes tecnologias, tomando como diseño inicial el mockup del maestro que imparte la clase.
+## Herramientas utilizadas
+- [Docker](https://www.docker.com)
 
-## Requisitos del CRUD
+## Imagenes de Docker utilizadas
+- [NGINX](https://hub.docker.com/_/nginx)
+- [NODE](https://hub.docker.com/_/node)
 
-- Read: leer la informacion de un registro siendo esta Nombre, dirección y telefono.
-- Create: crear un registro que contenga nombre, dirección, telefono y uid.
-- Update: Editar la información del registro nombre, dirección y telefono.
-- Delate: Eliminar por completo un registro.
+## Correr el proyecto
 
+1. Entrar en el directorio del [Directorio_Client](https://github.com/dylanson25/Directorio_vue/tree/directorio_with_WS_Docker/Directorio_Client)
+- Ejecutar el siguiente comando en la terminal para hacer la contruccion del archivo Dockerfile del directorio actual
+```
+docker build -t directorio-client .
+```
+- Ejecutar el siguiente comando para levantar el docker
+```
+docker run --name directorio-server -d -p 8080:80 directorio-client
+```
 
-## Herramientas utilizadas para la creación de la pagina
-
-- Como lenguaje de programación principal se utilizo JS
-- Freamwork utilizado VUE https://vuejs.org
-
-### Paquetes de npm
-
-- Buefy como paquete para estilizar la aplicación. https://buefy.org
-- Vuex como manejador de estados https://vuex.vuejs.org
-
-
-## Diseño
-
-### Deskopt 
-![image](https://user-images.githubusercontent.com/54459436/188935982-e435718b-fe78-47d0-83d8-a16adb64108c.png)
-![image](https://user-images.githubusercontent.com/54459436/188936438-c3d65556-a5e9-4bb3-8611-1dbf348af865.png)
-
-### Mobile
-![image](https://user-images.githubusercontent.com/54459436/188937032-585d9997-7abc-4fb9-bd33-838240f0e48b.png)
-![image](https://user-images.githubusercontent.com/54459436/188937088-359e271b-2136-45db-b43b-321e3047a688.png)
+2. Entrar en el directorio del [Directorio_Server](https://github.com/dylanson25/Directorio_vue/tree/directorio_with_WS_Docker/Directorio_server)
+- Ejecutar el siguiente comando en la terminal para hacer la contruccion del archivo Dockerfile del directorio actual
+```
+docker build  -t ws-directorio .
+```
+- Ejecutar el siguiente comando para levantar el docker
+```
+winpty docker run --name ws-directorio-server  -it -p 8081:8081 ws-directorio
+```
 
